@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import { AppContext } from "../context/AppContext";
 
 export interface MenuProps {
   items?: Item[];
@@ -12,11 +13,16 @@ export interface Item {
 }
 
 export function Menu(props: MenuProps) {
+  const context = useContext(AppContext);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <StyledMenu {...props} open={isOpen}>
       <MenuContainer>
-        <MenuButton open={isOpen} onClick={() => setIsOpen(!isOpen)}>
+        <MenuButton
+          open={isOpen}
+          theme={context?.theme}
+          onClick={() => setIsOpen(!isOpen)}
+        >
           {isOpen ? "X" : "+"}
         </MenuButton>
         {props.items && (
@@ -33,7 +39,7 @@ export function Menu(props: MenuProps) {
   );
 }
 
-const StyledMenu = styled.div<{ open: boolean }>`
+const StyledMenu = styled.div<{ open: boolean; theme?: "light" | "dark" }>`
   transform: ${({ open }) => (open ? "translateX(0)" : "translateX(-300px)")};
   height: 100vh;
   width: 300px;
@@ -70,17 +76,17 @@ const StyledNavLink = styled(NavLink)`
   }
 `;
 
-const MenuButton = styled.button<{ open: boolean }>`
+const MenuButton = styled.button<{ open: boolean; theme?: "light" | "dark" }>`
   position: absolute;
   transition: all 0.2s ease-in-out;
   top: 10px;
   border: unset;
-  color: ${({ open }) => (open ? "white" : "red")};
+  color: red;
   right: ${({ open }) => (open ? "10px" : "-40px")};
-  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 14px 2px rgba(0, 0, 0, 0.4)
+    ${({ open }) => (open ? "inset" : "")};
   border-radius: 50%;
   width: 30px;
   height: 30px;
-  background-color: ${({ open }) =>
-    open ? "rgba(172, 0, 0, 0.8)" : "rgba(255, 255, 255, 0.8)"};
+  background-color: white;
 `;

@@ -4,42 +4,43 @@ import { useState } from "react";
 import { Moon } from "../../assets/image/Moon";
 import { motion } from "framer-motion";
 import { AppContext } from "../../context/AppContext";
+import { useContext } from "react";
 
 export function LightDarkModeButton() {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const context = useContext(AppContext);
+
+  console.log("theme", context);
 
   function morphButton() {
-    if (theme === "light") {
-      setTheme("dark");
+    if (context?.theme == "light" || !context) {
+      context?.setTheme("dark");
     } else {
-      setTheme("light");
+      context?.setTheme("light");
     }
   }
 
   return (
-    <AppContext.Provider value={theme}>
-      <Wrapper onClick={morphButton}>
-        <IconWrapper>
-          {theme === "light" ? (
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ rotate: 180, scale: 1 }}
-              transition={{
-                type: "spring",
-                stiffness: 260,
-                damping: 20,
-              }}
-            >
-              <StyledSun width={30} />
-            </motion.div>
-          ) : (
-            <motion.div>
-              <StyledMoon width={30} />
-            </motion.div>
-          )}
-        </IconWrapper>
-      </Wrapper>
-    </AppContext.Provider>
+    <Wrapper onClick={morphButton}>
+      <IconWrapper>
+        {context?.theme === "light" ? (
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ rotate: 180, scale: 1 }}
+            transition={{
+              type: "spring",
+              stiffness: 260,
+              damping: 20,
+            }}
+          >
+            <StyledMoon width={30} />
+          </motion.div>
+        ) : (
+          <motion.div>
+            <StyledSun width={30} />
+          </motion.div>
+        )}
+      </IconWrapper>
+    </Wrapper>
   );
 }
 

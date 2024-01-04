@@ -3,14 +3,18 @@ import profilePic from "../../assets/profile-pic.jpg";
 
 export function MyPage() {
   return (
-    <>
+    <Wrapper>
       <ProfilePic src={profilePic} />
       <Title>
         <FirstName>Guillaume</FirstName> <LastName>DEBEIRE</LastName>
       </Title>
-    </>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  padding-top: 6rem;
+`;
 
 const ProfilePic = styled.img`
   width: 200px;
