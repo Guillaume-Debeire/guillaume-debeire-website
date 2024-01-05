@@ -1,8 +1,9 @@
-import styled from "styled-components";
+import { TemplatePage } from "../TemplatePage";
 
 export function MyWordpressThemes() {
-  return <Wrapper>Bonjour je suis MyWordpressThemes</Wrapper>;
+  return (
+    <TemplatePage title="Wordpress Themes">
+      Bonjour je suis MyWordpressThemes
+    </TemplatePage>
+  );
 }
-const Wrapper = styled.div`
-  padding-top: 6rem;
-`;

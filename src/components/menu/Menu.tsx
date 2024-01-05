@@ -2,6 +2,8 @@ import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { AppContext, IAppContext } from "../context/AppContext";
+import { BurgerMenu } from "../assets/image/BurgerMenu";
+import { motion } from "framer-motion";
 
 export interface MenuProps {
   items?: Item[];
@@ -31,7 +33,21 @@ export function Menu(props: MenuProps) {
           context={context}
           onClick={() => setIsOpen(!isOpen)}
         >
-          {isOpen ? "X" : "+"}
+          {isOpen ? (
+            <motion.div
+              initial={{ scale: 0, rotate: 180 }}
+              animate={{ rotate: 0, scale: 1 }}
+              transition={{
+                type: "spring",
+                stiffness: 260,
+                damping: 20,
+              }}
+            >
+              X
+            </motion.div>
+          ) : (
+            <StyledBurgerMenu width={20} color={context?.color} />
+          )}
         </MenuButton>
         {(props.items || props.externalLinks) && (
           <ItemsContainer>
@@ -61,14 +77,15 @@ const StyledMenu = styled.div<{ open: boolean; context?: IAppContext }>`
   transform: ${({ open }) => (open ? "translateX(0)" : "translateX(-300px)")};
   height: 100vh;
   width: 300px;
+  z-index: 100;
   transition: all 0.2s ease-in-out;
   position: fixed;
   left: 0;
   top: 0;
   background-color: ${({ context }) =>
     context?.theme === "light"
-      ? "rgba(0, 0, 0, 0.4)"
-      : "rgba(255, 255, 255, 0.4)"};
+      ? "rgba(0, 0, 0, 0.3)"
+      : "rgba(255, 255, 255, 0.3)"};
   backdrop-filter: blur(5px);
 `;
 
@@ -127,6 +144,9 @@ const MenuButton = styled.button<{ open: boolean; context?: IAppContext }>`
   transition: all 0.2s ease-in-out;
   top: 10px;
   border: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: ${({ context }) => context?.color};
   right: ${({ open }) => (open ? "10px" : "-40px")};
   box-shadow: 1px 1px 14px 2px rgba(0, 0, 0, 0.4)
@@ -135,4 +155,10 @@ const MenuButton = styled.button<{ open: boolean; context?: IAppContext }>`
   width: 30px;
   height: 30px;
   background-color: white;
+  &:hover {
+    background-color: ${({ context }) => context?.color};
+    color: white;
+  }
 `;
+
+const StyledBurgerMenu = styled(BurgerMenu)``;

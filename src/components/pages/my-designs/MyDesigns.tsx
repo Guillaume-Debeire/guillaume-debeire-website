@@ -1,73 +1,49 @@
 import styled from "styled-components";
 import { Design } from "../../design/Design";
-import ViceCityRadioDesign from "../../../assets/img/designs/vice-city-radio.png";
-import { Title } from "../../UI/title/Title";
+import ViceCityRadioDesign from "../../../assets/img/designs/vice-city-radio2.png";
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { TemplatePage } from "../TemplatePage";
 
 export interface Design {
   label: string;
   src: string;
 }
 export function MyDesigns() {
-  const [selectedDesign, setSelectedDesign] = useState<Design | undefined>(
-    undefined
-  );
-
+  const [expanded, setExpanded] = useState<boolean>(false);
   const designs: Design[] = [
+    {
+      label: "Vice City Radio",
+      src: ViceCityRadioDesign,
+    },
+    {
+      label: "Vice City Radio",
+      src: ViceCityRadioDesign,
+    },
+    {
+      label: "Vice City Radio",
+      src: ViceCityRadioDesign,
+    },
     {
       label: "Vice City Radio",
       src: ViceCityRadioDesign,
     },
   ];
   return (
-    <Wrapper>
-      <Title>My Designs</Title>
+    <TemplatePage title="Designs">
       <DesignContainer>
-        {designs.map((design) => (
-          <Button onClick={() => setSelectedDesign(design)}>
-            <Design title="Vice City Radio" src={ViceCityRadioDesign} />
-          </Button>
+        {designs.map(() => (
+          <DesignWrapper onClick={() => setExpanded(!expanded)}>
+            <Design
+              expanded={expanded}
+              title="Vice City Radio"
+              src={ViceCityRadioDesign}
+            />
+          </DesignWrapper>
         ))}
-        {selectedDesign && (
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            exit={{ scale: 0 }}
-            transition={{
-              type: "spring",
-              stiffness: 260,
-              damping: 20,
-            }}
-          >
-            <Modal>
-              <CloseModalButton onClick={() => setSelectedDesign(undefined)}>
-                X
-              </CloseModalButton>
-              fezfez
-            </Modal>
-          </motion.div>
-        )}
       </DesignContainer>
-    </Wrapper>
+    </TemplatePage>
   );
 }
-const Wrapper = styled.div`
-  padding-top: 6rem;
-`;
-
-const Modal = styled.div`
-  width: 80%;
-  height: 80%;
-  position: absolute;
-  transition: all 0.2s ease-in-out;
-  top: 0;
-  left: 0;
-  background-color: white;
-`;
-
-const CloseModalButton = styled.button``;
-
 const DesignContainer = styled.div`
   margin: 0 auto;
   width: 70%;
@@ -77,7 +53,4 @@ const DesignContainer = styled.div`
   flex-wrap: wrap;
 `;
 
-const Button = styled.button`
-  border: unset;
-  background: transparent;
-`;
+const DesignWrapper = styled.div``;

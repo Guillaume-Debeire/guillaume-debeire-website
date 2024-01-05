@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { AppContext } from "../../context/AppContext";
 import { useContext, useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 export interface ColorPickerProps {}
 
@@ -15,29 +15,35 @@ export function ColorPicker() {
         onClick={() => setOpenColorPicker(!openColorPicker)}
         openColorPicker={openColorPicker}
       ></StyledColorPicker>
-      {openColorPicker && (
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ rotate: 0, scale: 1 }}
-          exit={{ scale: 0 }}
-          transition={{
-            type: "spring",
-            stiffness: 260,
-            damping: 20,
-          }}
-        >
-          <ColorPickerModal theme={context?.theme}>
-            <Blue onClick={() => context?.setColor("rgba(7, 66, 157, 0.8)")} />
-            <Red onClick={() => context?.setColor("red")} />
-            <Yellow
-              onClick={() => context?.setColor("rgba(178, 174, 1, 0.8)")}
-            />
-            <Cyan onClick={() => context?.setColor("cyan")} />
-            <Purple onClick={() => context?.setColor("purple")} />
-            <Green onClick={() => context?.setColor("green")} />
-          </ColorPickerModal>
-        </motion.div>
-      )}
+      <AnimatePresence>
+        {openColorPicker && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0 }}
+            transition={{
+              type: "spring",
+              stiffness: 260,
+              damping: 20,
+            }}
+          >
+            <ColorPickerModal theme={context?.theme}>
+              <Blue
+                onClick={() => context?.setColor("rgba(7, 66, 157, 0.8)")}
+              />
+              <Red onClick={() => context?.setColor("rgba(147, 0, 0, 0.8)")} />
+              <Yellow
+                onClick={() => context?.setColor("rgba(178, 174, 1, 0.8)")}
+              />
+              <Cyan onClick={() => context?.setColor("cyan")} />
+              <Purple onClick={() => context?.setColor("purple")} />
+              <Green
+                onClick={() => context?.setColor("rgba(31, 146, 20, 1)")}
+              />
+            </ColorPickerModal>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </Wrapper>
   );
 }
@@ -94,7 +100,7 @@ const Blue = styled(ColorBall)`
   background-color: rgba(7, 66, 157, 0.8);
 `;
 const Red = styled(ColorBall)`
-  background-color: red;
+  background-color: rgba(147, 0, 0, 0.8);
 `;
 const Yellow = styled(ColorBall)`
   background-color: rgba(216, 213, 12, 0.8);
@@ -106,5 +112,5 @@ const Purple = styled(ColorBall)`
   background-color: purple;
 `;
 const Green = styled(ColorBall)`
-  background-color: green;
+  background-color: rgba(31, 146, 20);
 `;
