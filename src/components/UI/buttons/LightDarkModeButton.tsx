@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Sun } from "../../assets/image/Sun";
-import { useState } from "react";
 import { Moon } from "../../assets/image/Moon";
 import { motion } from "framer-motion";
 import { AppContext } from "../../context/AppContext";
@@ -25,11 +24,12 @@ export function LightDarkModeButton() {
         {context?.theme === "light" ? (
           <motion.div
             initial={{ scale: 0 }}
-            animate={{ rotate: 180, scale: 1 }}
+            animate={{ rotate: 360, scale: 1 }}
             transition={{
               type: "spring",
               stiffness: 260,
               damping: 20,
+              duration: 0.3,
             }}
           >
             <StyledMoon width={30} />

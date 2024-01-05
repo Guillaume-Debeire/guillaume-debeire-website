@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import styled from "styled-components";
-import { AppContext } from "../context/AppContext";
+import { AppContext, IAppContext } from "../context/AppContext";
 
 export interface MenuProps {
   items?: Item[];
@@ -15,12 +15,13 @@ export interface Item {
 export function Menu(props: MenuProps) {
   const context = useContext(AppContext);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
   return (
-    <StyledMenu {...props} open={isOpen}>
+    <StyledMenu {...props} open={isOpen} context={context}>
       <MenuContainer>
         <MenuButton
           open={isOpen}
-          theme={context?.theme}
+          context={context}
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? "X" : "+"}
@@ -28,7 +29,7 @@ export function Menu(props: MenuProps) {
         {props.items && (
           <ItemsContainer>
             {props.items.map((item) => (
-              <StyledNavLink to={item.to} key={item.label}>
+              <StyledNavLink to={item.to} key={item.label} context={context}>
                 {item.label}
               </StyledNavLink>
             ))}
@@ -39,7 +40,7 @@ export function Menu(props: MenuProps) {
   );
 }
 
-const StyledMenu = styled.div<{ open: boolean; theme?: "light" | "dark" }>`
+const StyledMenu = styled.div<{ open: boolean; context?: IAppContext }>`
   transform: ${({ open }) => (open ? "translateX(0)" : "translateX(-300px)")};
   height: 100vh;
   width: 300px;
@@ -47,21 +48,26 @@ const StyledMenu = styled.div<{ open: boolean; theme?: "light" | "dark" }>`
   position: fixed;
   left: 0;
   top: 0;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: ${({ context }) =>
+    context?.theme === "light"
+      ? "rgba(0, 0, 0, 0.4)"
+      : "rgba(255, 255, 255, 0.4)"};
   backdrop-filter: blur(10px);
 `;
 
 const MenuContainer = styled.nav`
   position: relative;
+  height: 100%;
 `;
 
 const ItemsContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 2rem;
 `;
 
-const StyledNavLink = styled(NavLink)`
+const StyledNavLink = styled(NavLink)<{ context?: IAppContext }>`
   width: fit-content;
   border: unset;
   background-color: transparent;
@@ -69,19 +75,23 @@ const StyledNavLink = styled(NavLink)`
   padding: 5px 9px;
   transition: all 0.2s ease-in-out;
   border-radius: 5px;
-  color: white;
+  color: ${({ context, theme }) =>
+    context?.theme === "light" ? theme.darkColor : theme.lightColor};
   text-decoration: none;
   &:hover {
     background-color: rgba(255, 255, 255, 0.2);
   }
+  &.active {
+    color: ${({ context }) => context?.color};
+  }
 `;
 
-const MenuButton = styled.button<{ open: boolean; theme?: "light" | "dark" }>`
+const MenuButton = styled.button<{ open: boolean; context?: IAppContext }>`
   position: absolute;
   transition: all 0.2s ease-in-out;
   top: 10px;
   border: unset;
-  color: red;
+  color: ${({ context }) => context?.color};
   right: ${({ open }) => (open ? "10px" : "-40px")};
   box-shadow: 1px 1px 14px 2px rgba(0, 0, 0, 0.4)
     ${({ open }) => (open ? "inset" : "")};

@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import { Github } from "../assets/image/Github";
 import { LightDarkModeButton } from "../UI/buttons/LightDarkModeButton";
+import { ColorPicker } from "../UI/color-picker/ColorPicker";
 
 export function AppHeader() {
   return (
     <StyledHeader>
       <NavContainer>
+        <ColorPicker />
         <LightDarkModeButton />
         <Button href="https://github.com/Guillaume-Debeire" target="_blank">
           <StyledGithub width={30} />
