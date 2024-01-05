@@ -27,9 +27,11 @@ export function ColorPicker() {
           }}
         >
           <ColorPickerModal theme={context?.theme}>
-            <Blue onClick={() => context?.setColor("blue")} />
+            <Blue onClick={() => context?.setColor("rgba(7, 66, 157, 0.8)")} />
             <Red onClick={() => context?.setColor("red")} />
-            <Yellow onClick={() => context?.setColor("yellow")} />
+            <Yellow
+              onClick={() => context?.setColor("rgba(178, 174, 1, 0.8)")}
+            />
             <Cyan onClick={() => context?.setColor("cyan")} />
             <Purple onClick={() => context?.setColor("purple")} />
             <Green onClick={() => context?.setColor("green")} />
@@ -63,10 +65,9 @@ const StyledColorPicker = styled.div<{
     ${({ context }) => context.color},
     ${({ context }) => (context.theme === "light" ? "black" : "white")}
   );
-  border-radius: ${({ openColorPicker }) =>
-    openColorPicker ? "50% 50% 0 0" : "50%"};
-  height: 25px;
-  width: 25px;
+  border-radius: 50%;
+  height: 24px;
+  width: 24px;
   transition: all 0.2s ease-in-out;
   padding: 4px;
   cursor: pointer;
@@ -76,29 +77,27 @@ const ColorPickerModal = styled.div<{ theme?: "light" | "dark" }>`
   position: absolute;
   display: flex;
   justify-content: center;
-  gap: 5rem;
+  gap: 2rem;
   align-items: center;
   flex-wrap: wrap;
-  /* top: 40px; */
   right: 0;
   right: 0;
-  border-radius: 10px 0 10px 10px;
-  width: 300px;
-  height: 200px;
-  background: ${({ theme }) => (theme === "light" ? "black" : "white")};
-  box-shadow: 1px 1px 14px 1px
-    ${({ theme }) =>
-      theme === "light" ? "rgba(0, 0, 0, 0.5)" : "rgba(255, 255, 255, 0.5)"};
+  border-radius: 10px;
+  padding: 1rem;
+  width: 150px;
+  height: 100px;
+  background: transparent;
+  box-shadow: 1px 1px 14px 1px rgba(0, 0, 0, 0.5);
 `;
 
 const Blue = styled(ColorBall)`
-  background-color: blue;
+  background-color: rgba(7, 66, 157, 0.8);
 `;
 const Red = styled(ColorBall)`
   background-color: red;
 `;
 const Yellow = styled(ColorBall)`
-  background-color: yellow;
+  background-color: rgba(216, 213, 12, 0.8);
 `;
 const Cyan = styled(ColorBall)`
   background-color: cyan;

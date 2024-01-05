@@ -1,15 +1,22 @@
 import { useContext, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { AppContext, IAppContext } from "../context/AppContext";
 
 export interface MenuProps {
   items?: Item[];
+  externalLinks?: ExternalLink[];
 }
 
 export interface Item {
   label: string;
   to: string;
+}
+
+export interface ExternalLink {
+  label: string;
+  to: string;
+  target?: "_blank" | "_parent" | "_self" | "_top";
 }
 
 export function Menu(props: MenuProps) {
@@ -26,12 +33,22 @@ export function Menu(props: MenuProps) {
         >
           {isOpen ? "X" : "+"}
         </MenuButton>
-        {props.items && (
+        {(props.items || props.externalLinks) && (
           <ItemsContainer>
-            {props.items.map((item) => (
+            {props.items?.map((item) => (
               <StyledNavLink to={item.to} key={item.label} context={context}>
                 {item.label}
               </StyledNavLink>
+            ))}
+            {props.externalLinks?.map((item) => (
+              <StyledExternallink
+                href={item.to}
+                key={item.label}
+                context={context}
+                target="_blank"
+              >
+                {item.label}
+              </StyledExternallink>
             ))}
           </ItemsContainer>
         )}
@@ -52,7 +69,7 @@ const StyledMenu = styled.div<{ open: boolean; context?: IAppContext }>`
     context?.theme === "light"
       ? "rgba(0, 0, 0, 0.4)"
       : "rgba(255, 255, 255, 0.4)"};
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(5px);
 `;
 
 const MenuContainer = styled.nav`
@@ -68,6 +85,25 @@ const ItemsContainer = styled.div`
 `;
 
 const StyledNavLink = styled(NavLink)<{ context?: IAppContext }>`
+  width: fit-content;
+  border: unset;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 5px 9px;
+  transition: all 0.2s ease-in-out;
+  border-radius: 5px;
+  color: ${({ context, theme }) =>
+    context?.theme === "light" ? theme.darkColor : theme.lightColor};
+  text-decoration: none;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  &.active {
+    color: ${({ context }) => context?.color};
+  }
+`;
+
+const StyledExternallink = styled.a<{ context?: IAppContext }>`
   width: fit-content;
   border: unset;
   background-color: transparent;

@@ -6,8 +6,8 @@ import { AppContext } from "./components/context/AppContext";
 import { UITheme } from "./components/UI-theme/UITheme";
 
 export function App() {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
-  const [color, setColor] = useState<string>("blue");
+  const [theme, setTheme] = useState<"light" | "dark">("dark");
+  const [color, setColor] = useState<string>("rgba(7, 66, 157, 0.8)");
 
   return (
     <AppContext.Provider value={{ theme, setTheme, color, setColor }}>
