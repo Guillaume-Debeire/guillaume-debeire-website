@@ -8,6 +8,8 @@ import { motion } from "framer-motion";
 export interface MenuProps {
   items?: Item[];
   externalLinks?: ExternalLink[];
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface Item {
@@ -23,17 +25,17 @@ export interface ExternalLink {
 
 export function Menu(props: MenuProps) {
   const context = useContext(AppContext);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  // const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
-    <StyledMenu {...props} open={isOpen} context={context}>
+    <StyledMenu {...props} open={props.open} context={context}>
       <MenuContainer>
         <MenuButton
-          open={isOpen}
+          open={props.open}
           context={context}
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => props.setOpen(!props.open)}
         >
-          {isOpen ? (
+          {props.open ? (
             <motion.div
               initial={{ scale: 0, rotate: 180 }}
               animate={{ rotate: 0, scale: 1 }}
@@ -46,7 +48,7 @@ export function Menu(props: MenuProps) {
               X
             </motion.div>
           ) : (
-            <StyledBurgerMenu width={20} color={context?.color} />
+            <StyledBurgerMenu width={20} color="white" />
           )}
         </MenuButton>
         {(props.items || props.externalLinks) && (
@@ -95,10 +97,11 @@ const MenuContainer = styled.nav`
 `;
 
 const ItemsContainer = styled.div`
+  text-align: left;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 2rem;
+  font-size: 20px;
 `;
 
 const StyledNavLink = styled(NavLink)<{ context?: IAppContext }>`
@@ -117,6 +120,7 @@ const StyledNavLink = styled(NavLink)<{ context?: IAppContext }>`
   }
   &.active {
     color: ${({ context }) => context?.color};
+    font-weight: 500;
   }
 `;
 
@@ -142,21 +146,23 @@ const StyledExternallink = styled.a<{ context?: IAppContext }>`
 const MenuButton = styled.button<{ open: boolean; context?: IAppContext }>`
   position: absolute;
   transition: all 0.2s ease-in-out;
-  top: 10px;
+  top: 0;
   border: unset;
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
   color: ${({ context }) => context?.color};
-  right: ${({ open }) => (open ? "10px" : "-40px")};
+  right: ${({ open }) => (open ? "0" : "-40px")};
   box-shadow: 1px 1px 14px 2px rgba(0, 0, 0, 0.4)
     ${({ open }) => (open ? "inset" : "")};
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  background-color: white;
+  width: ${({ open }) => (open ? "30px" : "40px")};
+  height: 100%;
+  background-color: ${({ context }) => context?.color};
   &:hover {
     background-color: ${({ context }) => context?.color};
+    width: ${({ open }) => (open ? "30px" : "80px")};
+    right: ${({ open }) => (open ? "0" : "-80px")};
     color: white;
   }
 `;

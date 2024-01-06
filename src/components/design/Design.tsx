@@ -30,10 +30,11 @@ export function Design(props: DesignProps) {
 }
 
 const Wrapper = styled.div<{ expanded: boolean }>`
-  width: ${({ expanded }) => (expanded ? "800px" : "200px")};
-
-  height: 100%;
+  /* width: ${({ expanded }) => (expanded ? "800px" : "200px")}; */
+  width: 200px;
+  /* height: 100%; */
   position: relative;
+  margin: auto;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
   &:hover {
@@ -74,5 +75,5 @@ const ImgDesign = styled.img<{ expanded: boolean }>`
 `;
 
 const Title = styled.h1`
-  font-size: 30px;
+  font-size: 20px;
 `;

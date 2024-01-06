@@ -24,15 +24,15 @@ export function TemplatePage(props: TemplatePageProps) {
             }}
           >
             <WrapperTitle>
-              <Title>{props.title}</Title>
+              <Title context={context}>{props.title}</Title>
               <motion.div
                 initial={{ x: 100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: 100, opacity: 0 }}
                 transition={{
                   type: "spring",
-                  stiffness: 260,
-                  damping: 20,
+                  stiffness: 180,
+                  damping: 10,
                 }}
               >
                 <UnderTitle context={context} />
@@ -67,19 +67,28 @@ const WrapperTitle = styled.div`
   margin: 1rem auto;
 `;
 
-const Title = styled.h1`
+const Title = styled.h1<{ context?: IAppContext }>`
   margin: 1rem auto;
   width: 100%;
   height: 100%;
   width: fit-content;
   z-index: 6;
+  color: ${({ context, theme }) =>
+    context?.theme === "light" ? theme.darkColor : theme.lightColor};
 `;
 
 const UnderTitle = styled.div<{ context?: IAppContext }>`
   width: 100%;
   height: 5px;
   position: relative;
-  bottom: 10px;
+  bottom: 14px;
+  transition: all 0.2s ease-in-out;
   background-color: ${({ context }) => context?.color};
   z-index: 5;
+  border-top: 2px solid
+    ${({ theme, context }) =>
+      context?.theme === "light" ? theme.lightColor : theme.darkColor};
+  border-bottom: 2px solid
+    ${({ theme, context }) =>
+      context?.theme === "light" ? theme.lightColor : theme.darkColor};
 `;

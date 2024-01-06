@@ -14,6 +14,14 @@ export function MyPage() {
         <FirstName>Guillaume</FirstName> <LastName>DEBEIRE</LastName>
       </Title>
       <Subtitle>Front-end Web Developer</Subtitle>
+      {/* <CardsWrapper>
+        <Card>
+          <CardTitle>Designs</CardTitle>
+        </Card>
+        <Card>
+          <CardTitle>Designs</CardTitle>
+        </Card>
+      </CardsWrapper> */}
     </TemplatePage>
   );
 }
@@ -29,6 +37,29 @@ const ProfilePic = styled.img<{ context?: IAppContext }>`
     box-shadow: 0 8px 14px 4px rgba(0, 0, 0, 0.6);
     transform: scale(1.1);
   }
+`;
+
+const CardsWrapper = styled.div`
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+`;
+
+const Card = styled.div`
+  background-color: red;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.2);
+  }
+`;
+
+const CardTitle = styled.h1`
+  padding: 0;
+  margin: 0;
 `;
 
 const Subtitle = styled.h2``;

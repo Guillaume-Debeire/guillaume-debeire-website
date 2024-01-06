@@ -9,7 +9,7 @@ export interface Design {
   src: string;
 }
 export function MyDesigns() {
-  const [expanded, setExpanded] = useState<boolean>(false);
+  const [selected, setSelected] = useState<number | undefined>(undefined);
   const designs: Design[] = [
     {
       label: "Vice City Radio",
@@ -31,10 +31,14 @@ export function MyDesigns() {
   return (
     <TemplatePage title="Designs">
       <DesignContainer>
-        {designs.map(() => (
-          <DesignWrapper onClick={() => setExpanded(!expanded)}>
+        {designs.map((_design, key) => (
+          <DesignWrapper
+            onClick={() => {
+              selected === key ? setSelected(undefined) : setSelected(key);
+            }}
+          >
             <Design
-              expanded={expanded}
+              expanded={selected === key}
               title="Vice City Radio"
               src={ViceCityRadioDesign}
             />
@@ -47,6 +51,7 @@ export function MyDesigns() {
 const DesignContainer = styled.div`
   margin: 0 auto;
   width: 70%;
+  height: 600px;
   display: flex;
   justify-content: center;
   gap: 2rem;

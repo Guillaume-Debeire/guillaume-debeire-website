@@ -28,9 +28,7 @@ export function ColorPicker() {
             }}
           >
             <ColorPickerModal theme={context?.theme}>
-              <Blue
-                onClick={() => context?.setColor("rgba(7, 66, 157, 0.8)")}
-              />
+              <Blue onClick={() => context?.setColor("rgba(7, 66, 157)")} />
               <Red onClick={() => context?.setColor("rgba(147, 0, 0, 0.8)")} />
               <Yellow
                 onClick={() => context?.setColor("rgba(178, 174, 1, 0.8)")}
@@ -84,6 +82,7 @@ const ColorPickerModal = styled.div<{ theme?: "light" | "dark" }>`
   display: flex;
   justify-content: center;
   gap: 2rem;
+  z-index: 100;
   align-items: center;
   flex-wrap: wrap;
   right: 0;
@@ -92,12 +91,13 @@ const ColorPickerModal = styled.div<{ theme?: "light" | "dark" }>`
   padding: 1rem;
   width: 150px;
   height: 100px;
-  background: transparent;
+  background: rgba(0, 0, 0, 0.7);
   box-shadow: 1px 1px 14px 1px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
 `;
 
 const Blue = styled(ColorBall)`
-  background-color: rgba(7, 66, 157, 0.8);
+  background-color: rgba(7, 66, 157);
 `;
 const Red = styled(ColorBall)`
   background-color: rgba(147, 0, 0, 0.8);
