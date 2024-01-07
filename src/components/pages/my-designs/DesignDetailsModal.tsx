@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useContext } from "react";
 import { AppContext, IAppContext } from "../../context/AppContext";
 import ViceCityRadioDesign from "../../../assets/img/designs/vice-city-radio2.png";

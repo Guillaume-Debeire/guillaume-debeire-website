@@ -133,24 +133,24 @@ const StyledNavLink = styled(NavLink)<{ context?: IAppContext }>`
   }
 `;
 
-const StyledExternallink = styled.a<{ context?: IAppContext }>`
-  width: fit-content;
-  border: unset;
-  background-color: transparent;
-  cursor: pointer;
-  padding: 5px 9px;
-  transition: all 0.2s ease-in-out;
-  border-radius: 5px;
-  color: ${({ context, theme }) =>
-    context?.theme === "light" ? theme.darkColor : theme.lightColor};
-  text-decoration: none;
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-  }
-  &.active {
-    color: ${({ context }) => context?.color};
-  }
-`;
+// const StyledExternallink = styled.a<{ context?: IAppContext }>`
+//   width: fit-content;
+//   border: unset;
+//   background-color: transparent;
+//   cursor: pointer;
+//   padding: 5px 9px;
+//   transition: all 0.2s ease-in-out;
+//   border-radius: 5px;
+//   color: ${({ context, theme }) =>
+//     context?.theme === "light" ? theme.darkColor : theme.lightColor};
+//   text-decoration: none;
+//   &:hover {
+//     background-color: rgba(255, 255, 255, 0.2);
+//   }
+//   &.active {
+//     color: ${({ context }) => context?.color};
+//   }
+// `;
 
 const MenuButton = styled.button<{ open: boolean; context?: IAppContext }>`
   position: absolute;

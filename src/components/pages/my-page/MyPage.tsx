@@ -42,28 +42,28 @@ const ProfilePic = styled.img<{ context?: IAppContext }>`
   }
 `;
 
-const CardsWrapper = styled.div`
-  height: 100%;
+// const CardsWrapper = styled.div`
+//   height: 100%;
 
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-`;
+//   display: flex;
+//   justify-content: center;
+//   gap: 1rem;
+// `;
 
-const Card = styled.div`
-  background-color: red;
-  border-radius: 10px;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  &:hover {
-    transform: scale(1.2);
-  }
-`;
+// const Card = styled.div`
+//   background-color: red;
+//   border-radius: 10px;
+//   padding: 0.5rem 1rem;
+//   cursor: pointer;
+//   &:hover {
+//     transform: scale(1.2);
+//   }
+// `;
 
-const CardTitle = styled.h1`
-  padding: 0;
-  margin: 0;
-`;
+// const CardTitle = styled.h1`
+//   padding: 0;
+//   margin: 0;
+// `;
 
 const Subtitle = styled.h2``;
 

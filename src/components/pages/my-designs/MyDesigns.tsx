@@ -4,7 +4,7 @@ import ViceCityRadioDesign from "../../../assets/img/designs/vice-city-radio2.pn
 import { useState } from "react";
 import { TemplatePage } from "../TemplatePage";
 import { DesignDetailsModal } from "./DesignDetailsModal";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 
 export interface Design {
   label: string;
