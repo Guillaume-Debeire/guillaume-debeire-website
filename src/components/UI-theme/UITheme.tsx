@@ -5,5 +5,5 @@ export interface IUITheme {
 
 export const UITheme: IUITheme = {
   darkColor: "rgba(37, 37, 37, 1)",
-  lightColor: "rgba(249, 249, 249, 1)",
+  lightColor: "#f5f5f5",
 };

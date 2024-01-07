@@ -59,14 +59,23 @@ export function Menu(props: MenuProps) {
               </StyledNavLink>
             ))}
             {props.externalLinks?.map((item) => (
-              <StyledExternallink
-                href={item.to}
-                key={item.label}
-                context={context}
-                target="_blank"
-              >
-                {item.label}
-              </StyledExternallink>
+              <>
+                {/* <StyledExternallink
+                  href={item.to}
+                  key={item.label}
+                  context={context}
+                  target="_blank"
+                >
+                  {item.label}
+                </StyledExternallink> */}
+                <a
+                  href="https://vice-city-radio.surge.sh/"
+                  key={item.label}
+                  target="_blank"
+                >
+                  {item.label}
+                </a>
+              </>
             ))}
           </ItemsContainer>
         )}
@@ -79,7 +88,7 @@ const StyledMenu = styled.div<{ open: boolean; context?: IAppContext }>`
   transform: ${({ open }) => (open ? "translateX(0)" : "translateX(-300px)")};
   height: 100vh;
   width: 300px;
-  z-index: 100;
+  z-index: 50;
   transition: all 0.2s ease-in-out;
   position: fixed;
   left: 0;

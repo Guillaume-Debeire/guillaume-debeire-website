@@ -4,24 +4,27 @@ import { Title } from "../../UI/title/Title";
 import { useContext } from "react";
 import { AppContext, IAppContext } from "../../context/AppContext";
 import { TemplatePage } from "../TemplatePage";
+import { motion } from "framer-motion";
 
 export function MyPage() {
   const context = useContext(AppContext);
   return (
     <TemplatePage>
-      <ProfilePic src={profilePic} context={context} />
+      <motion.div
+        initial={{ scale: 0, rotate: 90 }}
+        animate={{ rotate: 0, scale: 1 }}
+        transition={{
+          type: "spring",
+          stiffness: 260,
+          damping: 20,
+        }}
+      >
+        <ProfilePic src={profilePic} context={context} />
+      </motion.div>
       <Title>
         <FirstName>Guillaume</FirstName> <LastName>DEBEIRE</LastName>
       </Title>
       <Subtitle>Front-end Web Developer</Subtitle>
-      {/* <CardsWrapper>
-        <Card>
-          <CardTitle>Designs</CardTitle>
-        </Card>
-        <Card>
-          <CardTitle>Designs</CardTitle>
-        </Card>
-      </CardsWrapper> */}
     </TemplatePage>
   );
 }

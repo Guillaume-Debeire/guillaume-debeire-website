@@ -3,6 +3,8 @@ import { Design } from "../../design/Design";
 import ViceCityRadioDesign from "../../../assets/img/designs/vice-city-radio2.png";
 import { useState } from "react";
 import { TemplatePage } from "../TemplatePage";
+import { DesignDetailsModal } from "./DesignDetailsModal";
+import { AnimatePresence, motion } from "framer-motion";
 
 export interface Design {
   label: string;
@@ -30,21 +32,24 @@ export function MyDesigns() {
   ];
   return (
     <TemplatePage title="Designs">
-      <DesignContainer>
-        {designs.map((_design, key) => (
-          <DesignWrapper
-            onClick={() => {
-              selected === key ? setSelected(undefined) : setSelected(key);
-            }}
-          >
-            <Design
-              expanded={selected === key}
-              title="Vice City Radio"
-              src={ViceCityRadioDesign}
-            />
-          </DesignWrapper>
-        ))}
-      </DesignContainer>
+      <AnimatePresence>
+        <DesignContainer>
+          {designs.map((_design, key) => (
+            <DesignWrapper
+              onClick={() => {
+                selected === key ? setSelected(undefined) : setSelected(key);
+              }}
+            >
+              <Design
+                expanded={selected === key}
+                title="Vice City Radio"
+                src={ViceCityRadioDesign}
+              />
+            </DesignWrapper>
+          ))}
+        </DesignContainer>
+        {selected && <DesignDetailsModal setSelected={setSelected} />}
+      </AnimatePresence>
     </TemplatePage>
   );
 }
