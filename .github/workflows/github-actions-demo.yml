@@ -6,4 +6,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: yarn
-      - run: yarn dev
+      - run: ls
+      # - run: yarn dev
