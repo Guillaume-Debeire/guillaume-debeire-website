@@ -29,6 +29,5 @@ jobs:
       - run: npm i
       - run: npm run build --if-present
       - run: npm install --global surge
-      - run: surge --account gui_debe@hotmail.com
       # - run: exec /sbin/su-exec user surge "gui_debe@hotmail.com"
-      - run: surge ./dist --domain guillaume-debeire.surge.sh
+      - run: surge ./dist --domain guillaume-debeire.surge.sh --token 123
