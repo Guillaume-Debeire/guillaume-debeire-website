@@ -22,7 +22,7 @@ export function MyPage() {
         <ProfilePic src={profilePic} context={context} />
       </motion.div>
       <Title>
-        <FirstName>Guillaume</FirstName> <LastName>DEBEIRE</LastName>
+        <FirstName>Guillaume</FirstName> <LastName>DEBEIRE.</LastName>
       </Title>
       <Subtitle>Front-end Web Developer</Subtitle>
     </TemplatePage>
