@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { AppContext, IAppContext } from "../context/AppContext";
 
 export interface TemplatePageProps {
-  children: ReactNode | ReactNode[];
+  children?: ReactNode | ReactNode[];
   title?: ReactNode | ReactNode[];
 }
 export function TemplatePage(props: TemplatePageProps) {
