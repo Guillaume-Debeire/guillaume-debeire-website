@@ -10,17 +10,20 @@ export function MyPage() {
   const context = useContext(AppContext);
   return (
     <TemplatePage>
-      <motion.div
-        initial={{ scale: 0, rotate: 90 }}
-        animate={{ rotate: 0, scale: 1 }}
-        transition={{
-          type: "spring",
-          stiffness: 260,
-          damping: 20,
-        }}
-      >
-        <ProfilePic src={profilePic} context={context} />
-      </motion.div>
+      {profilePic && (
+        <motion.div
+          initial={{ scale: 0, rotate: 90 }}
+          animate={{ rotate: 0, scale: 1 }}
+          transition={{
+            type: "spring",
+            stiffness: 260,
+            damping: 20,
+          }}
+        >
+          <ProfilePic src={profilePic} context={context} />
+        </motion.div>
+      )}
+
       <Title>
         <FirstName>Guillaume</FirstName> <LastName>DEBEIRE.</LastName>
       </Title>
