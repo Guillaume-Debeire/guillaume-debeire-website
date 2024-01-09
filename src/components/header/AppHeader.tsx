@@ -21,9 +21,10 @@ const StyledHeader = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  background-color: transparent;
   width: 100vw;
   backdrop-filter: blur(10px);
+  /* box-shadow: 1px 1px 15px 1px rgba(0, 0, 0, 0.3); */
+  z-index: 20;
 `;
 
 const NavContainer = styled.div`
