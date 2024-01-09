@@ -3,5 +3,6 @@ run-name: Building and publishing website to surge.sh 🚀
 on: [push]
 jobs:
   Install Dependencies:
+    runs-on: ubuntu/latest
     steps:
       - run: npm install
